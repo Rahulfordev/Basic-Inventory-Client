@@ -38,38 +38,46 @@ const Invoice = ({ products }) => {
   return (
     <div className="p-4 bg-gray-50 min-h-screen">
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Products Invoice</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-xl font-bold">Products Invoice</h1>
+          <button
+            onClick={generatePDF}
+            className="py-2 px-6 bg-[#3bb77e] hover:bg-[#29a56c] text-white font-semibold rounded-lg shadow-md text-[15px]"
+          >
+            Download PDF
+          </button>
+        </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                <th className="py-2 px-4 border-b border-r bg-gray-100 text-left text-gray-600 font-semibold text-[15px]">
                   Name
                 </th>
-                <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                <th className="py-2 px-4 border-b border-r bg-gray-100 text-left text-gray-600 font-semibold text-[15px]">
                   Category
                 </th>
-                <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                <th className="py-2 px-4 border-b border-r bg-gray-100 text-left text-gray-600 font-semibold text-[15px]">
                   Price
                 </th>
-                <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                <th className="py-2 px-4 border-b border-r bg-gray-100 text-left text-gray-600 font-semibold text-[15px]">
                   Quantity
                 </th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50">
-                  <td className="py-2 px-4 border-b text-gray-700">
+                <tr key={product.id} className="hover:bg-gray-50 text-sm">
+                  <td className="py-2 px-4 border-b border-r text-gray-700">
                     {product.name}
                   </td>
-                  <td className="py-2 px-4 border-b text-gray-700">
+                  <td className="py-2 px-4 border-b border-r text-gray-700">
                     {product.category}
                   </td>
-                  <td className="py-2 px-4 border-b text-gray-700">
+                  <td className="py-2 px-4 border-b border-r text-gray-700">
                     ${product.price}
                   </td>
-                  <td className="py-2 px-4 border-b text-gray-700">
+                  <td className="py-2 px-4 border-b border-r text-gray-700">
                     {product.quantity}
                   </td>
                 </tr>
@@ -78,12 +86,6 @@ const Invoice = ({ products }) => {
           </table>
         </div>
       </div>
-      <button
-        onClick={generatePDF}
-        className="mt-4 py-2 px-6 bg-[#3bb77e] hover:bg-[#29a56c] text-white font-semibold rounded-lg shadow-md"
-      >
-        Download PDF
-      </button>
     </div>
   );
 };

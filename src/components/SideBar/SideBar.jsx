@@ -38,7 +38,7 @@ function Sidebar() {
 
           <li>
             <Link
-              to="/allusers"
+              to="/product-report"
               className="text-[#292f46] flex items-center justify-between mb-2"
               onClick={() => setOpen(!open)}
             >
