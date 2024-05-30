@@ -3,8 +3,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 
 import axios from "axios";
-import "./App.css";
-import Invoice from "./Invoice";
+import "./App.css"; 
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -150,8 +149,7 @@ const App = () => {
               </div>
             ))}
           </div>
-        </div>
-        <Invoice products={products} />
+        </div> 
       </div>
       {showModal && (
         <div className="modal">

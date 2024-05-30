@@ -1,3 +1,18 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: sans-serif;
+  background-color: #f8f9fa;
+  margin-inline: auto;
+  padding: 0 20px;
+}
+
+input,
+select {
+  background-color: inherit;
+  border: inherit;
+  outline: none;
+  color: inherit;
 }

@@ -30,31 +30,52 @@ const Invoice = ({ products }) => {
   };
 
   return (
-    <div>
-      <div ref={invoiceRef}>
-        <h1>Product Invoice</h1>
-        <table>
+    <div className="p-4 bg-gray-50 min-h-screen">
+      <div ref={invoiceRef} className="bg-white p-6 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold mb-4">Product Invoice</h1>
+        <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Quantity</th>
+              <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                Name
+              </th>
+              <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                Category
+              </th>
+              <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                Price
+              </th>
+              <th className="py-2 px-4 border-b bg-gray-100 text-left text-gray-600 font-semibold">
+                Quantity
+              </th>
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-                <td data-label="Name">{product.name}</td>
-                <td data-label="Category">{product.category}</td>
-                <td data-label="Price">${product.price}</td>
-                <td data-label="Quantity">{product.quantity}</td>
+              <tr key={product.id} className="hover:bg-gray-50">
+                <td className="py-2 px-4 border-b text-gray-700">
+                  {product.name}
+                </td>
+                <td className="py-2 px-4 border-b text-gray-700">
+                  {product.category}
+                </td>
+                <td className="py-2 px-4 border-b text-gray-700">
+                  ${product.price}
+                </td>
+                <td className="py-2 px-4 border-b text-gray-700">
+                  {product.quantity}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <button onClick={generatePDF}>Download PDF</button>
+      <button
+        onClick={generatePDF}
+        className="mt-4 py-2 px-6 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600"
+      >
+        Download PDF
+      </button>
     </div>
   );
 };
