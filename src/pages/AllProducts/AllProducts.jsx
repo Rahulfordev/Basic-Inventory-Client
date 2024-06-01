@@ -3,9 +3,11 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 
 import axios from "axios";
-import Invoice from "../../components/Invoice/Invoice";
+
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
+  console.log(products);
+  const [categories, setCategories] = useState([]);
   const [form, setForm] = useState({
     name: "",
     image: "",
@@ -13,11 +15,13 @@ const AllProducts = () => {
     price: "",
     quantity: "",
   });
+  console.log(form);
   const [editProductId, setEditProductId] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
 
   const fetchProducts = async () => {
@@ -25,7 +29,16 @@ const AllProducts = () => {
       const response = await axios.get("http://localhost:3001/api/products");
       setProducts(response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/categories");
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -63,7 +76,7 @@ const AllProducts = () => {
         ...form,
         image: imageUrl,
       };
-
+      console.log(productData);
       if (editProductId) {
         await axios.put(
           `http://localhost:3001/api/products/${editProductId}`,
@@ -98,7 +111,7 @@ const AllProducts = () => {
       await axios.delete(`http://localhost:3001/api/products/${id}`);
       fetchProducts();
     } catch (error) {
-      console.error("Error deleting data:", error);
+      console.error("Error deleting product:", error);
     }
   };
 
@@ -185,12 +198,11 @@ const AllProducts = () => {
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               >
-                <option value="Automobiles">Automobiles</option>
-                <option value="Home items">Home items</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Smartphones">Smartphones</option>
-                <option value="Sport items">Sport items</option>
-                <option value="Baby and Toys">Baby and Toys</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
               <input
                 type="number"

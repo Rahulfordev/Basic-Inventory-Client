@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiAlignLeft } from "react-icons/fi";
-import { FaRegClock, FaRegUser } from "react-icons/fa";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { MdOutlineManageAccounts, MdShoppingBag } from "react-icons/md";
+
+import { MdOutlineCategory, MdShoppingBag } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
@@ -39,7 +38,7 @@ function Sidebar() {
           <li>
             <Link
               to="/product-report"
-              className="text-[#292f46] flex items-center justify-between mb-2"
+              className="text-[#292f46] flex items-center justify-between"
               onClick={() => setOpen(!open)}
             >
               <span className="flex items-center gap-[10px]">
@@ -58,8 +57,16 @@ function Sidebar() {
                 open ? "max-h-14" : "max-h-0"
               }`}
             >
-              <li className="cursor-pointer">All Products</li>
+              <li className="cursor-pointer pt-2">All Products</li>
             </ul>
+          </li>
+          <li onClick={() => setOpen(false)}>
+            <Link
+              to="/category"
+              className="text-[#292f46] flex items-center gap-[10px]"
+            >
+              <MdOutlineCategory className="text-[#adb5bd] text-2xl" /> Category
+            </Link>
           </li>
         </ul>
       </div>

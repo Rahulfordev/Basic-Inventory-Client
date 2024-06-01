@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "../components/SideBar/SideBar";
 
-const DashboardLayout = () => {
+const MainLayout = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="lg:grid lg:grid-cols-5">
@@ -17,4 +17,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default MainLayout;
