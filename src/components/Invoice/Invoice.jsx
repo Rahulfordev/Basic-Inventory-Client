@@ -36,13 +36,18 @@ const Invoice = ({ products }) => {
   };
 
   return (
-    <div className="p-4 bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-[82vh]">
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center flex-col sm:flex-row gap-2 sm:gap-0 justify-between mb-4">
           <h1 className="text-xl font-bold">Products Invoice</h1>
           <button
             onClick={generatePDF}
-            className="py-2 px-6 bg-[#3bb77e] hover:bg-[#29a56c] text-white font-semibold rounded-lg shadow-md text-[15px]"
+            disabled={products.length === 0}
+            className={`py-[6px] sm:py-2 px-[14px] sm:px-6 text-white font-semibold rounded-lg shadow-md text-[15px] ${
+              products.length > 0
+                ? "bg-[#3bb77e] hover:bg-[#29a56c]"
+                : "bg-gray-300 cursor-not-allowed"
+            }`}
           >
             Download PDF
           </button>
@@ -65,24 +70,35 @@ const Invoice = ({ products }) => {
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="hover:bg-gray-50 text-sm">
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    {product.name}
-                  </td>
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    {product.category}
-                  </td>
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    ${product.price}
-                  </td>
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    {product.quantity}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {products.length > 0 ? (
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id} className="hover:bg-gray-50 text-sm">
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      {product.name}
+                    </td>
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      {product.category}
+                    </td>
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      ${product.price}
+                    </td>
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      {product.quantity}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            ) : (
+              <tr className="text-center">
+                <td
+                  className="text-xl font-bold text-gray-600 py-2"
+                  colSpan={4}
+                >
+                  No products available at the moment.
+                </td>
+              </tr>
+            )}
           </table>
         </div>
       </div>

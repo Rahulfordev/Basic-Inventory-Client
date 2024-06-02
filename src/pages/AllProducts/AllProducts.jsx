@@ -11,7 +11,7 @@ const AllProducts = () => {
   const [form, setForm] = useState({
     name: "",
     image: "",
-    category: "Automobiles",
+    category: "",
     price: "",
     quantity: "",
   });
@@ -89,7 +89,7 @@ const AllProducts = () => {
       setForm({
         name: "",
         image: "",
-        category: "Automobiles",
+        category: "",
         price: "",
         quantity: "",
       });
@@ -116,8 +116,9 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="flex items-center justify-end gap-2 mb-4">
+    <div className="max-w-7xl mx-auto min-h-[82vh]">
+      <div className="flex items-center justify-between gap-2 mb-4">
+        <h1 className="text-xl font-bold text-gray-600">Products List</h1>
         <button
           className="px-4 py-2 text-white bg-[#3bb77e] rounded hover:bg-[#29a56c] transition"
           onClick={() => setShowModal(true)}
@@ -126,44 +127,52 @@ const AllProducts = () => {
         </button>
       </div>
       <div className="p-4 bg-white border border-gray-200 rounded-lg overflow-x-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="border border-gray-200 rounded-lg hover:shadow-md duration-200 transition overflow-hidden"
-            >
-              <div className="h-56">
-                <img
-                  src={`http://localhost:3001${product.image}`}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h4 className="text-base font-semibold text-gray-700 truncate">
-                  {product.name}
-                </h4>
-                <p className="text-green-600 font-medium">${product.price}</p>
-                <div className="flex items-center gap-2 mt-2">
-                  <button
-                    className="flex items-center gap-1 px-3 py-1 text-sm text-white bg-[#3bb77e] rounded hover:bg-[#29a56c] transition"
-                    onClick={() => handleEdit(product)}
-                  >
-                    <MdEdit />
-                    Edit
-                  </button>
-                  <button
-                    className="flex items-center gap-1 px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-[#3bb77e] hover:text-white hover:border-[#3bb77e] transition"
-                    onClick={() => handleDelete(product.id)}
-                  >
-                    <MdDelete />
-                    Delete
-                  </button>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="border border-gray-200 rounded-lg hover:shadow-md duration-200 transition overflow-hidden"
+              >
+                <div className="h-56">
+                  <img
+                    src={`http://localhost:3001${product.image}`}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h4 className="text-base font-semibold text-gray-700 truncate">
+                    {product.name}
+                  </h4>
+                  <p className="text-green-600 font-medium">${product.price}</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <button
+                      className="flex items-center gap-1 px-3 py-1 text-sm text-white bg-[#3bb77e] rounded hover:bg-[#29a56c] transition"
+                      onClick={() => handleEdit(product)}
+                    >
+                      <MdEdit />
+                      Edit
+                    </button>
+                    <button
+                      className="flex items-center gap-1 px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-[#3bb77e] hover:text-white hover:border-[#3bb77e] transition"
+                      onClick={() => handleDelete(product.id)}
+                    >
+                      <MdDelete />
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center">
+            <h1 className="text-xl font-bold text-gray-600">
+              No products available at the moment.
+            </h1>
+          </div>
+        )}
       </div>
 
       {showModal && (
@@ -198,6 +207,9 @@ const AllProducts = () => {
                 onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               >
+                <option value="" disabled>
+                  Select a category
+                </option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.name}>
                     {category.name}

@@ -77,7 +77,7 @@ const Category = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-[82vh]">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-xl font-bold text-gray-600">Manage Categories</h1>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 mb-4 mt-4">
@@ -123,25 +123,36 @@ const Category = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {categories.map((category) => (
-                <tr key={category.id} className="hover:bg-gray-50 text-sm">
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    {category.name}
-                  </td>
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    <button onClick={() => startEditCategory(category)}>
-                      Edit
-                    </button>
-                  </td>
-                  <td className="py-2 px-4 border-b border-r text-gray-700">
-                    <button onClick={() => deleteCategory(category.id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {categories.length > 0 ? (
+              <tbody>
+                {categories.map((category) => (
+                  <tr key={category.id} className="hover:bg-gray-50 text-sm">
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      {category.name}
+                    </td>
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      <button onClick={() => startEditCategory(category)}>
+                        Edit
+                      </button>
+                    </td>
+                    <td className="py-2 px-4 border-b border-r text-gray-700">
+                      <button onClick={() => deleteCategory(category.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            ) : (
+              <tr className="text-center">
+                <td
+                  className="text-xl font-bold text-gray-600 py-2"
+                  colSpan={3}
+                >
+                  No categories available at the moment.
+                </td>
+              </tr>
+            )}
           </table>
         </div>
       </div>
